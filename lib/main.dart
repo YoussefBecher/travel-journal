@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/favorites_provider.dart';
+import 'providers/weather_provider.dart';
 import 'screens/explore_screen.dart';
 
 void main() {
@@ -8,6 +9,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+        ChangeNotifierProvider(create: (_) => WeatherProvider()),
       ],
       child: const TravelJournalApp(),
     ),
