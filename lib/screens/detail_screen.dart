@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/destination.dart';
 import '../models/weather.dart';
-import '../services/weather_service.dart';
+import '../providers/weather_provider.dart';
+import '../widgets/country_header.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.destination});
@@ -18,10 +20,8 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   late Future<Weather> _weather;
 
-  Future<Weather> _fetch() => WeatherService().fetch(
-    widget.destination.lat,
-    widget.destination.lng,
-  );
+  Future<Weather> _fetch() =>
+      context.read<WeatherProvider>().get(widget.destination);
 
   @override
   void initState() {
@@ -43,6 +43,8 @@ class _DetailScreenState extends State<DetailScreen> {
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              const CountryHeader(),
+              const SizedBox(height: 16),
               Text(
                 d.tagline,
                 style: theme.textTheme.titleLarge
