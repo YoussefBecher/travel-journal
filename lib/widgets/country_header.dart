@@ -28,7 +28,7 @@ class _CountryHeaderState extends State<CountryHeader> {
           return const LinearProgressIndicator();
         }
         if (snapshot.hasError) {
-          return const Text('Could not load country info');
+          return Text('Could not load country info\n${snapshot.error}');
         }
         final c = snapshot.data!;
         return Text(
